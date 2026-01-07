@@ -9,6 +9,8 @@ An intelligent Retrieval-Augmented Generation (RAG) system with intent classific
 - **Document Retrieval**: Semantic search using FAISS and sentence transformers
 - **Calculator Tool**: Safe evaluation of mathematical expressions
 - **Confidence Checking**: Returns "I don't know" when uncertain
+- **Production-Ready**: LRU caching, retry logic with exponential backoff, rate limit handling
+- **Multi-Provider LLM**: Support for Ollama (local), Arli AI, Google Gemini, or OpenAI
 - **Local-First**: FAISS vector store runs entirely on your machine
 - **Streamlit UI**: Clean, minimal web interface
 
@@ -42,14 +44,16 @@ An intelligent Retrieval-Augmented Generation (RAG) system with intent classific
 
 ## 📋 Tech Stack
 
-| Component        | Technology                               |
-| ---------------- | ---------------------------------------- |
-| **LLM**          | Google Gemini 2.0 Flash Lite             |
-| **Embeddings**   | sentence-transformers (all-MiniLM-L6-v2) |
-| **Vector Store** | FAISS (local)                            |
-| **Framework**    | LangChain                                |
-| **UI**           | Streamlit                                |
-| **Language**     | Python 3.10+                             |
+| Component          | Technology                                           |
+| ------------------ | ---------------------------------------------------- |
+| **LLM**            | Ollama (llama3.2 local) or Arli AI / Gemini / OpenAI |
+| **Embeddings**     | sentence-transformers (all-MiniLM-L6-v2)             |
+| **Vector Store**   | FAISS (local)                                        |
+| **Framework**      | LangChain                                            |
+| **Caching**        | In-memory LRU cache with hit/miss tracking           |
+| **Error Handling** | Retry with exponential backoff, rate limit detection |
+| **UI**             | Streamlit                                            |
+| **Language**       | Python 3.10+                                         |
 
 ## 🚀 Quick Start
 
@@ -284,23 +288,6 @@ If uncertain → Returns: "I don't have enough reliable information to answer th
 - Check if port 8501 is available
 - Try: `streamlit run app.py --server.port 8502`
 
-## 🔮 Future Enhancements
-
-- [ ] Caching layer to reduce API calls
-- [ ] Hybrid intent classifier (regex + embeddings + LLM fallback)
-- [ ] Local calculation parsing (avoid LLM for math)
-- [ ] Cross-encoder re-ranking
-- [ ] Semantic chunking
-- [ ] Hybrid search (dense + sparse)
-- [ ] Query rewriting
-- [ ] Multi-document support with metadata filtering
-- [ ] Export conversation history
-- [ ] Dark mode UI
-
-## 📝 Development Notes
-
-See [dev.md](dev.md) for detailed development guidelines and constraints.
-
 ## 📄 License
 
 MIT License - feel free to use this project for learning and development.
@@ -320,4 +307,4 @@ For issues or questions, please open an issue on GitHub.
 
 ---
 
-**Note**: This project uses Google Gemini API which may have usage limits and costs. Monitor your API usage through the Google Cloud Console.
+**Note**: This project supports multiple LLM providers. Use Ollama for unlimited local inference, or cloud APIs (Arli AI, Gemini, OpenAI) with potential usage limits and costs.
