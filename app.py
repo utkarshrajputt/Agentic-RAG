@@ -55,6 +55,11 @@ if st.button("Ask"):
                     st.write(f"**Confidence:** {result['confidence']}")
                     if result.get("original_answer"):
                         st.write(f"**Original answer:** {result['original_answer']}")
+                    
+                    # Show cache stats
+                    if hasattr(agent, 'cache'):
+                        cache_stats = agent.cache.stats()
+                        st.write(f"**Cache:** {cache_stats['hits']} hits / {cache_stats['misses']} misses ({cache_stats['hit_rate']} hit rate)")
             
             except Exception as e:
                 st.error(f"Error: {e}")
@@ -72,4 +77,23 @@ with st.sidebar:
     - Search through documents
     - Perform calculations
     """)
+    
+    st.markdown("---")
+    
+    # Cache statistics
+    if agent and hasattr(agent, 'cache'):
+        st.markdown("### 📊 Cache Stats")
+        cache_stats = agent.cache.stats()
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("Hit Rate", cache_stats['hit_rate'])
+        with col2:
+            st.metric("Cache Size", f"{cache_stats['size']}/{cache_stats['max_size']}")
+        
+        if st.button("Clear Cache"):
+            agent.cache.clear()
+            st.success("Cache cleared!")
+            st.rerun()
+    
+    st.markdown("---")
     
