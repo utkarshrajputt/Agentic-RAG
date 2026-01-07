@@ -45,6 +45,7 @@ pip install -r requirements.txt
 ```
 
 This installs:
+
 - `langchain` and `langchain-google-genai`
 - `sentence-transformers`
 - `faiss-cpu`
@@ -84,10 +85,12 @@ mkdir data
 ```
 
 **Supported formats:**
+
 - PDF (`.pdf`)
 - Plain text (`.txt`)
 
 **Example documents:**
+
 - Research papers
 - Technical documentation
 - Books/articles
@@ -100,6 +103,7 @@ python ingest.py
 ```
 
 **What this does:**
+
 - Loads all documents from `data/`
 - Splits them into 600-character chunks with 150-char overlap
 - Generates 384-dimensional embeddings
@@ -107,6 +111,7 @@ python ingest.py
 - Saves to `index/faiss.index` and `index/chunks.pkl`
 
 **Expected output:**
+
 ```
 Loaded 5 documents
 Created 113 chunks
@@ -125,6 +130,7 @@ streamlit run app.py
 ```
 
 **Expected output:**
+
 ```
 You can now view your Streamlit app in your browser.
 
@@ -139,16 +145,19 @@ Open `http://localhost:8501` in your browser.
 ### Test the Components
 
 **Test retriever:**
+
 ```bash
 python retriever.py
 ```
 
 **Test tools:**
+
 ```bash
 python tools.py
 ```
 
 **Test agent:**
+
 ```bash
 python agent.py
 ```
@@ -158,7 +167,7 @@ python agent.py
 Try these in the Streamlit UI:
 
 1. **Document question**: "What does the document say about [your topic]?"
-2. **Calculation**: "What is 125 * 48?"
+2. **Calculation**: "What is 125 \* 48?"
 3. **General knowledge**: "What is machine learning?"
 
 ## Common Issues
@@ -166,6 +175,7 @@ Try these in the Streamlit UI:
 ### Issue: "GOOGLE_API_KEY not found"
 
 **Solution:**
+
 - Check if `.env` file exists and contains the key
 - Verify no extra spaces or quotes in `.env`
 - Restart the app after creating `.env`
@@ -173,6 +183,7 @@ Try these in the Streamlit UI:
 ### Issue: "FAISS index not found"
 
 **Solution:**
+
 - Run `python ingest.py` first
 - Check that `data/` folder exists and contains documents
 - Verify `index/` folder was created with `faiss.index` and `chunks.pkl`
@@ -180,6 +191,7 @@ Try these in the Streamlit UI:
 ### Issue: Import errors
 
 **Solution:**
+
 ```bash
 # Ensure venv is activated
 .\venv\Scripts\Activate.ps1
@@ -191,6 +203,7 @@ pip install -r requirements.txt --force-reinstall
 ### Issue: Streamlit won't start
 
 **Solution:**
+
 ```bash
 # Check if port is already in use
 # Try a different port
@@ -200,6 +213,7 @@ streamlit run app.py --server.port 8502
 ### Issue: Execution policy error (PowerShell)
 
 **Solution:**
+
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
@@ -240,6 +254,7 @@ Agentic-RAG/
 ### Change Chunk Size
 
 Edit `ingest.py`:
+
 ```python
 ingestion = DocumentIngestion(
     chunk_size=800,  # Increase for more context
@@ -250,6 +265,7 @@ ingestion = DocumentIngestion(
 ### Change Top-K Results
 
 Edit retrieval call in `retriever.py` or `tools.py`:
+
 ```python
 results = self.retriever.retrieve(query, top_k=10)  # More results
 ```
@@ -257,8 +273,9 @@ results = self.retriever.retrieve(query, top_k=10)  # More results
 ### Change LLM Model
 
 Edit `agent.py`:
+
 ```python
-def __init__(self, index_dir: str = "./index", 
+def __init__(self, index_dir: str = "./index",
              model_name: str = "gemini-2.5-flash"):  # Upgrade model
 ```
 
