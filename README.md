@@ -62,8 +62,8 @@ An intelligent Retrieval-Augmented Generation (RAG) system with intent classific
 
 Clone the repository:
 ```bash
-git clone https://github.com/yourusername/intent-aware-rag.git
-cd intent-aware-rag
+git clone https://github.com/yourusername/Agentic-RAG.git
+cd Agentic-RAG
 ```
 
 Create and activate virtual environment:

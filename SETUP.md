@@ -14,8 +14,8 @@ Complete step-by-step setup instructions for the Intent-Aware RAG Agent.
 ### Step 1: Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/intent-aware-rag.git
-cd intent-aware-rag
+git clone https://github.com/yourusername/Agentic-RAG.git
+cd Agentic-RAG
 ```
 
 ### Step 2: Create Virtual Environment
@@ -209,7 +209,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 After setup, your directory should look like:
 
 ```
-intent-aware-rag/
+Agentic-RAG/
 ├── venv/                  # Virtual environment (not in git)
 ├── data/                  # Your documents (not in git)
 │   ├── document1.pdf
