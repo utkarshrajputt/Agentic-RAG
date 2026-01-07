@@ -60,7 +60,11 @@ An intelligent Retrieval-Augmented Generation (RAG) system with intent classific
 ### 1. Prerequisites
 
 - Python 3.10 or higher
-- Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
+- **Choose ONE LLM provider:**
+  - **Ollama (recommended - free, unlimited, local)**: [Download here](https://ollama.com/download)
+  - **Arli AI**: API key from [arliai.com](https://www.arliai.com/)
+  - **Google Gemini**: API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+  - **OpenAI**: API key from [OpenAI Platform](https://platform.openai.com/api-keys)
 
 ### 2. Installation
 
@@ -89,21 +93,43 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. Setup
+### 3. Setup LLM Provider
 
-Set your Gemini API key:
+**Option A: Ollama (Recommended - Free & Unlimited)**
 
-**Option A - Environment Variable (temporary):**
-
+1. Install Ollama:
 ```powershell
-$env:GOOGLE_API_KEY="your_gemini_api_key_here"
+# Windows
+winget install Ollama.Ollama
+# Or download from: https://ollama.com/download
 ```
 
-**Option B - .env File (persistent):**
-Create a `.env` file in the project root:
-
+2. Pull a model:
+```powershell
+# Restart PowerShell after install, then:
+ollama pull llama3.2
 ```
-GOOGLE_API_KEY=your_gemini_api_key_here
+
+3. Create `.env` file:
+```env
+LLM_PROVIDER=ollama
+```
+
+**Option B: Cloud API (Arli AI / Gemini / OpenAI)**
+
+Create a `.env` file with your API key:
+```env
+# For Arli AI (recommended cloud option)
+LLM_PROVIDER=arliai
+ARLIAI_API_KEY=your_arliai_key_here
+
+# OR for Gemini
+LLM_PROVIDER=gemini
+GOOGLE_API_KEY=your_gemini_key_here
+
+# OR for OpenAI
+LLM_PROVIDER=openai
+OPENAI_API_KEY=your_openai_key_here
 ```
 
 ### 4. Prepare Documents
@@ -114,6 +140,8 @@ Create a `data/` folder and add your PDF or text files:
 mkdir data
 # Add your .pdf or .txt files to the data/ folder
 ```
+
+### 5. Build Vector Index
 
 ### 5. Build Vector Index
 

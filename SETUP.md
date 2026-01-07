@@ -46,30 +46,54 @@ pip install -r requirements.txt
 
 This installs:
 
-- `langchain` and `langchain-google-genai`
+- `langchain` and LLM provider packages
 - `sentence-transformers`
 - `faiss-cpu`
 - `streamlit`
 - `PyPDF2`
 - `python-dotenv`
 
-### Step 4: Configure API Key
+### Step 4: Setup LLM Provider
 
-**Method 1: Environment Variable (Session-based)**
+**Option A: Ollama (Recommended - Free & Local)**
 
+1. **Install Ollama:**
 ```powershell
-$env:GOOGLE_API_KEY="your_actual_gemini_api_key"
+# Windows - using winget
+winget install Ollama.Ollama
+
+# Or download installer from:
+# https://ollama.com/download
 ```
 
-Note: This only works for the current PowerShell session.
+2. **Restart PowerShell** (important - path needs to refresh)
 
-**Method 2: .env File (Persistent, Recommended)**
+3. **Pull a model:**
+```powershell
+ollama pull llama3.2
+```
 
-Create a file named `.env` in the project root:
+4. **Create .env file:**
+```env
+LLM_PROVIDER=ollama
+```
 
-```bash
-# .env file content
-GOOGLE_API_KEY=your_actual_gemini_api_key
+**Option B: Cloud API Provider**
+
+Create a file named `.env` in the project root with your chosen provider:
+
+```env
+# For Arli AI (recommended - better quotas)
+LLM_PROVIDER=arliai
+ARLIAI_API_KEY=your_arliai_api_key
+
+# OR for Google Gemini
+LLM_PROVIDER=gemini
+GOOGLE_API_KEY=your_gemini_api_key
+
+# OR for OpenAI
+LLM_PROVIDER=openai
+OPENAI_API_KEY=your_openai_api_key
 ```
 
 The app will automatically load this on startup.
